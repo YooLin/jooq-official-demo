@@ -47,6 +47,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -62,45 +66,42 @@
 
                 <executions>
                     <execution>
+                        <id>default</id>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                     </execution>
                 </executions>
 
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <scope>runtime</scope>
-                        <version>5.1.47</version>
-                    </dependency>
-                </dependencies>
-
                 <configuration>
-                    <!-- JDBC connection parameters -->
                     <jdbc>
                         <driver>com.mysql.jdbc.Driver</driver>
                         <url>jdbc:mysql://118.25.41.246:3306</url>
                         <user>root</user>
                         <password>root</password>
                     </jdbc>
-
-                    <!-- Generator parameters -->
                     <generator>
                         <database>
                             <name>org.jooq.meta.mysql.MySQLDatabase</name>
                             <includes>.*</includes>
-                            <excludes></excludes>
-                            <!-- In case your database supports catalogs, e.g. SQL Server:
-                            <inputCatalog>public</inputCatalog>
-                              -->
+                            <excludes>schema_version</excludes>
+                            <!-- 数据库名 -->
                             <inputSchema>user</inputSchema>
                         </database>
                         <target>
                             <packageName>cn.sagreen.jooqdemo</packageName>
                             <directory>target/generated-sources/jooq</directory>
                         </target>
+                        <generate>
+                            <instanceFields>true</instanceFields>
+                            <pojos>true</pojos>
+                            <daos>true</daos>
+                            <springAnnotations>true</springAnnotations>
+                            <pojosEqualsAndHashCode>true</pojosEqualsAndHashCode>
+                            <!--把数据库时间类型映射到java 8时间类型-->
+                            <javaTimeTypes>true</javaTimeTypes>
+                        </generate>
                     </generator>
                 </configuration>
             </plugin>
