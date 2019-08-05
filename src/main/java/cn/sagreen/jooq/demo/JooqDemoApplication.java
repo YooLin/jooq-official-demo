@@ -1,4 +1,4 @@
-package cn.sagreen.jooqdemo;
+package cn.sagreen.jooq.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

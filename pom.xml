@@ -8,6 +8,7 @@
         <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>cn.sagreen</groupId>
     <artifactId>jooq-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -47,10 +48,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-logging</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
@@ -64,10 +61,17 @@
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
 
+                <dependencies>
+                    <dependency>
+                        <groupId>cn.sagreen</groupId>
+                        <artifactId>jooq-generate-strategy</artifactId>
+                        <version>0.0.1-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
+
                 <executions>
                     <execution>
-                        <id>default</id>
-                        <phase>generate-sources</phase>
+                        <phase>none</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -87,10 +91,10 @@
                             <includes>.*</includes>
                             <excludes>schema_version</excludes>
                             <!-- 数据库名 -->
-                            <inputSchema>user</inputSchema>
+                            <inputSchema>store</inputSchema>
                         </database>
                         <target>
-                            <packageName>cn.sagreen.jooqdemo</packageName>
+                            <packageName>cn.sagreen.jooq.demo</packageName>
                             <directory>target/generated-sources/jooq</directory>
                         </target>
                         <generate>
@@ -102,6 +106,9 @@
                             <!--把数据库时间类型映射到java 8时间类型-->
                             <javaTimeTypes>true</javaTimeTypes>
                         </generate>
+                        <strategy>
+                            <name>cn.sagreen.jooq.demo.strategy.CustomerNameStrategy</name>
+                        </strategy>
                     </generator>
                 </configuration>
             </plugin>

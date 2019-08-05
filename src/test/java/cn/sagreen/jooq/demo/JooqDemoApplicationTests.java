@@ -1,4 +1,4 @@
-package cn.sagreen.jooqdemo;
+package cn.sagreen.jooq.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
