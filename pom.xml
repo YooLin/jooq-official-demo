@@ -92,6 +92,8 @@
                             <excludes>schema_version</excludes>
                             <!-- 数据库名 -->
                             <inputSchema>store</inputSchema>
+                            <!-- 乐观锁字段 -->
+                            <recordVersionFields>record_version</recordVersionFields>
                         </database>
                         <target>
                             <packageName>cn.sagreen.jooq.demo</packageName>
